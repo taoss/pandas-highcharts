@@ -53,7 +53,8 @@ def serialize(df, output_type="javascript", chart_type="default", *args, **kwarg
         pass
 
     def serialize_credits(df, output, *args, **kwargs):
-        pass
+        output["credits"] = []
+        output["credits"].append({"enabled": kwargs["credits"]})
 
     def serialize_data(df, output, *args, **kwargs):
         pass
@@ -94,6 +95,8 @@ def serialize(df, output_type="javascript", chart_type="default", *args, **kwarg
             df = df.sort_index()
         series = df.to_dict('series')
         output["series"] = []
+        output["credits"] = []
+        output["credits"].append({"enabled": "false"})
         for name, data in series.items():
             if df[name].dtype.kind in "biufc":
                 sec = is_secondary(name, **kwargs)
