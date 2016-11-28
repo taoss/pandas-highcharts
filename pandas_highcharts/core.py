@@ -108,6 +108,8 @@ def serialize(df, output_type="javascript", chart_type="default", *args, **kwarg
                     d["stacking"] = 'normal'
                 if kwargs.get("style"):
                     d["dashStyle"] = pd2hc_linestyle(kwargs["style"].get(name, "-"))
+                if kwargs.get("linewidth"):
+                    d["lineWidth"] = kwargs["linewidth"].get(name, 3)                    
                 output["series"].append(d)
         output['series'].sort(key=lambda s: s['name'])
 
